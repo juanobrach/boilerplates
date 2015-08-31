@@ -1,5 +1,6 @@
 {
   "name": "gm2dev-bolierplate",
+  "auth": "juanobrach",
   "version": "1.0.0",
   "description": "We can create a proyect more quickly",
   "main": "launch.js",

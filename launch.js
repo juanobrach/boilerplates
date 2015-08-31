@@ -26,8 +26,7 @@ var conform
 prompt.start();
 prompt.get([name ,domainName], function (err, result) {
 
-  var proyectsFolder = "/Users/juanobrach/"
-  // var proyectsFolder = "/home/gm2dev/documents"
+  var proyectsFolder = "/home/gm2dev/documents"
   var proyectName = result.name
   var domain = "."+result.domainName;
   var fullDomain = proyectName+domain
@@ -78,7 +77,7 @@ prompt.get([name ,domainName], function (err, result) {
     echo("virtual host creado")
     // Ejecutar sudo a2ensite + nombredel proyecto
     echo("ejecuto a2ensite")
-    exec("a2ensite "+fullDomain)
+    exec("sudo a2ensite "+fullDomain)
     exec("sudo service apache2 restart")
     echo("el proyecto esta creado")
     echo("El dominio es :" + fullDomain)
