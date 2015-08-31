@@ -26,7 +26,7 @@ var conform
 prompt.start();
 prompt.get([name ,domainName], function (err, result) {
 
-  var proyectsFolder = "/home/gm2dev/documents"
+  var proyectsFolder = "/home/gm2dev/documents/"
   var proyectName = result.name
   var domain = "."+result.domainName;
   var fullDomain = proyectName+domain
