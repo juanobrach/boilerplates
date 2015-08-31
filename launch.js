@@ -50,7 +50,7 @@ prompt.get([name ,domainName], function (err, result) {
     exec("git init")
   }
   //creo un virtual host
-  cd("/etc/apache2/sites-available")
+  cd("/etc/apache2/sites-available/")
   if(test('-f',fullDomain)){
     echo("virtual host ya existe")
   }else{
@@ -75,10 +75,10 @@ prompt.get([name ,domainName], function (err, result) {
              +"</VirtualHost>"+"\n"
     VH.to(fullDomain)
 
-    echo("virtual host creado")
     // Ejecutar sudo a2ensite + nombredel proyecto
     echo("ejecuto a2ensite")
     exec("sudo a2ensite "+fullDomain)
+    echo("reseteo a2ensite")
     exec("sudo service apache2 restart")
     echo("el proyecto esta creado")
     echo("El dominio es :" + fullDomain)
