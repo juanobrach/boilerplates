@@ -1,0 +1,27 @@
+{
+  "name": "gm2dev-bolierplate",
+  "version": "1.0.0",
+  "description": "We can create a proyect more quickly",
+  "main": "launch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanobrach/virtual-host-boilerplate.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "php5"
+  ],
+  "author": "juanobrach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanobrach/virtual-host-boilerplate/issues"
+  },
+  "homepage": "https://github.com/juanobrach/virtual-host-boilerplate#readme",
+  "dependencies": {
+    "prompt": "^0.2.14",
+    "shelljs": "^0.5.3"
+  }
+}
