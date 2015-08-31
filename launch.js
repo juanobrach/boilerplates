@@ -50,6 +50,7 @@ prompt.get([name ,domainName], function (err, result) {
     exec("git init")
   }
   //creo un virtual host
+  cd("/etc/apache2/sites-available")
   if(test('-f',fullDomain)){
     echo("virtual host ya existe")
   }else{
