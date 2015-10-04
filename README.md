@@ -1,5 +1,5 @@
 # virtual-host-boilerplate
-con este Script podemos ahorrar la configuracion de los procedimientos basicos para iniciar un proyecto en el virtual host de apache
-
+A simple command-line tools to start a proyect with a new GIT repository and local folder
+## Use this command to start
 $ node launch
- 
+
