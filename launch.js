@@ -1,6 +1,5 @@
 require("shelljs/global")
 var prompt = require('prompt');
- 
 
 var name = {
   properties: {
@@ -10,78 +9,53 @@ var name = {
     }
   }
 };
- 
-var domainName = {
-  properties: {
-    domainName: {
-      message: 'Domain namae , ie "zgdev.com' ,
-      required: true
+var folder = {
+  properties:{
+    folder:{
+      message: 'example folder: /Users/juanobrach/proyects/'
     }
   }
-};
+}
 
-var conform 
-
+var user = {
+  properties:{
+    user:{
+      message: 'Your github user name. ie: linus_torvalds'
+    }
+  }
+}
 
 prompt.start();
-prompt.get([name ,domainName], function (err, result) {
+prompt.get([name, folder, user], function (err, result) {
+  /*Guardo el usuario de github en una variable*/
+  var user = result.user;
+  /*carpeta raiz donde quiero generar el proyecto*/
+  var proyectsFolder = result.folder;
+  /*guardo el resultado del prompt para name*/
+  var proyectName = result.name;
 
-  var proyectsFolder = "/home/gm2dev/documents/"
-  var proyectName = result.name
-  var domain = "."+result.domainName;
-  var fullDomain = proyectName+domain
-
-  var proyectPath = proyectsFolder + proyectName + "/"
+  var proyectPath = proyectsFolder + proyectName + "/";
 
   //Creo la carpeta del proyecto
   if (!test('-d', proyectPath)) {
-    cd(proyectsFolder)
-    mkdir(proyectPath)
-    cd(proyectPath)
-    echo(pwd())
+    cd(proyectsFolder);
+    mkdir(proyectName);
+    cd(proyectPath);
+    echo(pwd());
   }else{
     // recorro el directorio
-    echo("el proyecto existe")
-    cd(proyectPath)
+    echo("el proyecto existe");
+    cd(proyectPath);
   }
 
   // GIT init del proyecto
-  if(!test("-f",".git")){
-    exec("git init")
+  if( !test("-f",".git") ){
+    echo("iniciando git");
+    exec("git init");
+    exec("git status");
+    exec('curl -i -u "'+user+'"  -d \'{"name": "'+proyectName+'", "auto_init": true}\' https://api.github.com/user/repos');
+    exec('git remote add origin https://github.com/juanobrach/"'+proyectName+'".git');
   }
-  //creo un virtual host
-  cd("/etc/apache2/sites-available/")
-  if(test('-f',fullDomain)){
-    echo("virtual host ya existe")
-  }else{
-    echo("creando VirtualHost")
-    var VH = "<VirtualHost *:80>"+"\n"
-                +" ServerName "+fullDomain +"\n"
-                +" DocumentRoot"+ proyectPath +"\n"
-
-                +" <Directory "+ proyectPath +" >"+"\n"
-                +"         Options FollowSymLinks MultiViews Includes"+"\n"
-                +"         AllowOverride All"+"\n"
-                +"         Order allow,deny"+"\n"
-                +"         allow from all"+"\n"
-                +" </Directory>"+"\n"
-
-                +"ErrorLog ${APACHE_LOG_DIR}/"+ proyectName+".local.error.log"+"\n"
-
-                +"# Possible values include: debug, info, notice, warn, error, crit alert, emerg."+"\n"
-                +"LogLevel warn"+"\n"
-
-                +"CustomLog ${APACHE_LOG_DIR}/"+proyectName+".local.access.log combined"+"\n"
-             +"</VirtualHost>"+"\n"
-    VH.to(fullDomain)
-
-    // Ejecutar sudo a2ensite + nombredel proyecto
-    echo("ejecuto a2ensite")
-    exec("sudo a2ensite "+fullDomain)
-    echo("reseteo a2ensite")
-    exec("sudo service apache2 restart")
-    echo("el proyecto esta creado")
-    echo("El dominio es :" + fullDomain)
-  }
-
+  echo("el proyecto esta creado");
+  echo('Tu repositorio remoto es:https://github.com/juanobrach/'+proyectName+'.git');
 });
